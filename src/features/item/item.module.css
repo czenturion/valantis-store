@@ -1,0 +1,16 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 14px;
+    max-width: 200px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #f1f1f1, #d5d5d5, #eeeeee, #cbcbcb, #eeeeee);
+
+}
+
+.item:hover {
+    background-color: #ccffc5;
+}
