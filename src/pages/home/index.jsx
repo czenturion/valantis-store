@@ -1,34 +1,24 @@
 import { useEffect, useState } from "react"
 import Home from '@/features/home'
 import MainLayout from "@/widgets/layouts/mainLayout"
-import { API } from "@/shared/api/api"
-import { onlyUnique } from "@/shared/helpers/onlyUnique"
+import { fetchIds, fetchItems } from "@/services/api/requests"
 
 const HomePage = () => {
     const [currentIds, setCurrentIds] = useState([])
     const [currentItems, setCurrentItems] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        try {
-            API.get_ids(1, 50)
-                .then(res => {
-                    setCurrentIds(res.filter(onlyUnique))
-                })
-        } catch (er) {
-            console.error(er)
-        }
+        fetchIds(setCurrentIds, currentPage, setLoading)
     }, [])
 
     useEffect(() => {
-        if (currentIds?.length > 0) {
-            API.get_items(currentIds).then(res => {
-                setCurrentItems(res)
-            })
-        }
+        fetchItems(currentIds, setCurrentItems, setLoading)
     }, [currentIds])
 
     return <MainLayout>
-        <Home currentItems={currentItems} />
+        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
     </MainLayout>
 }
 
