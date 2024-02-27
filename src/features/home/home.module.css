@@ -13,12 +13,44 @@
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 30px;
-    grid-column: 2 / span 2;
     gap: 10px;
 }
 
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
 .button {
-    width: 100px;
-    height: 50px;
+    width: 60px;
     margin-left: 12px;
+    cursor: pointer;
+}
+
+.find {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+
+.findInput {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.findIcon {
+    margin-left: 10px;
+    cursor: pointer;
 }
