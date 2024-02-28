@@ -8,7 +8,7 @@
     height: 160px;
     border: 1px solid #b7b7b7;
     border-radius: 6px;
-    background: linear-gradient(45deg, #f1f1f1, #e0e0e0, #dedede, #f6f6f6, #eeeeee);
+    background: linear-gradient(45deg, #eeeeee, #f1f1f1, #ffffff, #f1f1f1, #eeeeee);
 }
 
 .item:only-child {

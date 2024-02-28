@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import Home from '@/features/home'
-import MainLayout from "@/widgets/layouts/mainLayout"
-import { fetchIds, fetchItems } from "@/services/api/requests"
+import MainAppLayout from "@/widgets/layouts/mainLayout"
+import { fetchIds, fetchItems } from "@/shared/api/requests"
+import { Loader } from "@/features/loader"
 
 const HomePage = () => {
     const [currentIds, setCurrentIds] = useState([])
@@ -15,11 +16,12 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchItems(currentIds, setCurrentItems, setLoading)
+        console.log(currentIds, 'currentIds+++++++++')
     }, [currentIds])
 
-    return <MainLayout>
-        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
-    </MainLayout>
+    return <MainAppLayout>{
+        !loading ? <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
+     : <Loader width={100} height={100}/>}</MainAppLayout>
 }
 
 export default HomePage

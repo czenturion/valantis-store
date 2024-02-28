@@ -18,16 +18,35 @@
 
 .buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
+    gap: 40px;
 }
 
 .button {
-    width: 60px;
-    margin-left: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
     cursor: pointer;
+    transition: all .2s ease;
+}
+
+.button:hover {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+}
+
+.pages {
+    display: flex;
+    gap: 20px;
 }
 
 .find {
@@ -36,7 +55,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-left: 20px;
+    gap: 10px;
 }
 
 
@@ -44,13 +63,20 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    min-width: 200px;
+    max-width: 500px;
+    width: 25vw;
     height: 40px;
     border: none;
     border-radius: 6px;
-    padding: 6px;
+    padding: 6px 12px;
+    transition: outline .2s ease;
+    outline: 1px solid #efefef;
 }
 
-.findIcon {
-    margin-left: 10px;
-    cursor: pointer;
+.findInput:hover,
+.findInput:focus,
+.findInput:active{
+    outline: 1px solid #969696;
+    border: none;
 }
