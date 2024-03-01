@@ -6,6 +6,7 @@ import RightArrow from "@/../public/icons/rightArrow.svg"
 import LeftArrow from "@/../public/icons/leftArrow.svg"
 import Find from "@/../public/icons/find.svg"
 import Image from "next/image"
+import clsx from "clsx"
 
 const Home = ({ currentItems, setCurrentIds, currentPage, setCurrentPage, loading, setLoading }) => {
     const { result } = currentItems
@@ -21,15 +22,17 @@ const Home = ({ currentItems, setCurrentIds, currentPage, setCurrentPage, loadin
     }
 
     const toFindItems = () => {
-        findItems('price', 10000, setCurrentIds, setLoading)
+        findItems('product', "Золотое колье с бриллиантами и ониксом Pasquale Bruni", setCurrentIds, setLoading)
     }
 
     console.log(loading)
 
+    const cn = {
+        contentItems: clsx(loading && s.loading, result?.length > 0 && s.contentItems)
+    }
+
     return <div className={s.content}>
         <div className={s.buttons}>
-            {/*<button disabled={loading && currentPage > 1} className={s.button} onClick={prevPage}><Image src={LeftArrow} alt="leftArrow"/></button>*/}
-            {/*<button disabled={loading} className={s.button} onClick={nextPage}><Image src={RightArrow} alt="rightArrow"/></button>*/}
             <div className={s.pages}>
                 <button disabled={loading} className={s.button} onClick={prevPage}>
                     <Image src={LeftArrow} width={30} height={30} alt="leftArrow"/>
@@ -38,16 +41,24 @@ const Home = ({ currentItems, setCurrentIds, currentPage, setCurrentPage, loadin
                     <Image src={RightArrow} width={30} height={30} alt="rightArrow"/>
                 </button>
             </div>
-            <div className={s.find}>
-                <input className={s.findInput} type="text" placeholder="Поиск..."/>
-                <button className={s.button} onClick={toFindItems}>
-                    <Image src={Find} className={s.findIcon} width={25} height={25} alt="find"/>
-                </button>
-            </div>
+            <form>
+                <div className={s.find}>
+                    <select className={s.select}>
+                        <option className={s.option} value="product">Название</option>
+                        <option className={s.option} value="price">Цена</option>
+                        <option className={s.option} value="brand">Брэнд</option>
+                    </select>
+                    <input className={s.findInput} type="text" placeholder="Поиск..."/>
+                    <button className={s.button} onClick={toFindItems} type="button">
+                        <Image src={Find} className={s.findIcon} width={25} height={25} alt="find"/>
+                    </button>
+                </div>
+            </form>
         </div>
-        <div className={s.contentItems}>
+        <div className={cn.contentItems}>
             {
-                result ? result.map((item, i) => <Item key={i} item={item}/>) : <Loader width={100} height={100}/>
+                !loading && result ? result.map((item, i) => <Item key={i} item={item}/>) :
+                    <Loader width={100} height={100}/>
             }
         </div>
     </div>

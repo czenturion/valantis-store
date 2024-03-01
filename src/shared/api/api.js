@@ -21,11 +21,11 @@ export const API = {
         })
             .then(res => res.data)
     },
-    get_fields(offset, limit) {
+    get_fields(field, offset, limit) {
         return instance.post('', {
             "action": "get_fields",
             "params": {
-                "field": "brand",
+                "field": field,
                 "offset": offset,
                 "limit": limit
             }

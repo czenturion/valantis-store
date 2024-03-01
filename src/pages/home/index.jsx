@@ -16,12 +16,12 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchItems(currentIds, setCurrentItems, setLoading)
-        console.log(currentIds, 'currentIds+++++++++')
+        console.log(currentIds, "++++++++++++++")
     }, [currentIds])
 
-    return <MainAppLayout>{
-        !loading ? <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
-     : <Loader width={100} height={100}/>}</MainAppLayout>
+    return <MainAppLayout>
+        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
+    </MainAppLayout>
 }
 
 export default HomePage
