@@ -16,7 +16,6 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchItems(currentIds, setCurrentItems, setLoading)
-        console.log(currentIds, "++++++++++++++")
     }, [currentIds])
 
     return <MainAppLayout>

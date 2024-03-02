@@ -9,6 +9,13 @@ export default function Document() {
               <link
                   href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
                   rel="stylesheet"/>
+              <link
+                  rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"/>
+              <link
+                  rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+              <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"/>
           </Head>
           <body>
           <Main/>
