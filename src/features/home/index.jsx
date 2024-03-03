@@ -33,11 +33,12 @@ const Home = ({ currentItems, setCurrentIds, currentPage, setCurrentPage, loadin
     }
 
     const cn = {
+        buttons: clsx(loading && s.disabled, s.buttons),
         contentItems: clsx(loading && s.loading, result?.length > 0 && s.contentItems)
     }
 
     return <div className={s.content}>
-        <div className={s.buttons}>
+        <div className={cn.buttons}>
             <div className={s.pages}>
                 <button disabled={loading} className={s.button} onClick={prevPage}>
                     <Image src={LeftArrow} width={30} height={30} alt="leftArrow"/>

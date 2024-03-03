@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_URL, PASS } from '@/shared/const/consts'
+import { BASE_URL, PASS } from '@/shared/consts/consts'
 
 const md5 = require('md5')
 
