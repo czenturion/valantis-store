@@ -37,7 +37,7 @@ export const API = {
         return instance.post('', {
             "action": "filter",
             "params": {
-                [field.toString()]: value
+                [field.toString()]: field === "price" ? Number(value) : value
             }
         })
             .then(res => res.data)

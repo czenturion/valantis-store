@@ -4,7 +4,7 @@ const Item = ({ item }) => {
     return <div className={s.item}>
         <p>{item.id}</p>
         <strong>{item.product}</strong>
-        <p>Цена: {item.price} р.</p>
+        <p>Цена: <strong>{item.price}</strong> р.</p>
     </div>
 }
 

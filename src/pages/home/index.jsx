@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import Home from '@/features/home'
 import MainAppLayout from "@/widgets/layouts/mainLayout"
 import { fetchIds, fetchItems } from "@/shared/api/requests"
-import { Loader } from "@/features/loader"
 
 const HomePage = () => {
     const [currentIds, setCurrentIds] = useState([])
