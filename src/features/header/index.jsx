@@ -7,32 +7,37 @@ import Find from "@/../public/icons/find.svg"
 import clsx from "clsx"
 import { fetchIds, findItems } from "@/shared/api/requests"
 
-const Header = ({ loading, setLoading, setCurrentPage, currentPage, setCurrentIds }) => {
+const Header = ({ loading, setLoading, currentOffset, setCurrentOffset, setCurrentIds }) => {
+
     const [searchValue, setSearchValue] = useState('')
 
     const nextPage = () => {
-        setCurrentPage(currentPage + 1)
-        fetchIds(setCurrentIds, currentPage + 1, setLoading)
+        setCurrentOffset(currentOffset + 50)
+        fetchIds(setCurrentIds, currentOffset + 50, setLoading)
     }
 
     const prevPage = () => {
-        setCurrentPage(currentPage - 1)
-        fetchIds(setCurrentIds, currentPage - 1, setLoading)
+        setCurrentOffset(currentOffset - 50)
+        fetchIds(setCurrentIds, currentOffset - 50, setLoading)
     }
 
     const toFindItems = () => {
         if (searchValue.length > 0) {
             findItems(document.getElementById("selectField").value, searchValue, setCurrentIds, setLoading)
+        } else {
+            setCurrentOffset(0)
+            fetchIds(setCurrentIds, 0, setLoading)
         }
     }
 
     const cn = {
-        buttons: clsx(loading && s.disabled, s.buttons)
+        buttons: clsx(loading && s.disabled, s.buttons),
+        leftArrowBtn: clsx(currentOffset === 0 && s.disabled, s.button)
     }
 
     return <div className={cn.buttons}>
         <div className={s.pages}>
-            <button disabled={loading} className={s.button} onClick={prevPage}>
+            <button disabled={loading} className={cn.leftArrowBtn} onClick={prevPage}>
                 <Image src={LeftArrow} width={30} height={30} alt="leftArrow"/>
             </button>
             <button disabled={loading} className={s.button} onClick={nextPage}>
@@ -42,7 +47,8 @@ const Header = ({ loading, setLoading, setCurrentPage, currentPage, setCurrentId
         <form>
             <div className={s.find}>
                 <div className={s.select}>
-                    <select name="field" id="selectField">
+                    {/* inline styles for soft render, should to find out about it */}
+                    <select name="field" id="selectField" style={{height: 40, width: 160, border: "none", paddingLeft: 40}}>
                         <option value="product">Название</option>
                         <option value="price">Цена</option>
                         <option value="brand">Брэнд</option>

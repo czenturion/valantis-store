@@ -1,17 +1,11 @@
-import { useEffect } from "react"
 import s from "@/features/home/home.module.css"
 import Item from "@/features/item"
 import { Loader } from "@/features/loader"
 import clsx from "clsx"
-import initChoices from "@/shared/scripts/choicesInit"
 import Header from "@/features/header"
 
 const Home = ({ loading, currentItems, ...rest }) => {
     const { result } = currentItems
-
-    useEffect(() => {
-        initChoices("#selectField")
-    }, [])
 
     const cn = {
         contentItems: clsx(loading && s.loading, result?.length > 0 && s.contentItems)

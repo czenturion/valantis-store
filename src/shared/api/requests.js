@@ -17,7 +17,6 @@ export const fetchIds = async (setCurrentIds, offset, setLoading, retries = 1) =
 }
 
 export const fetchItems = async (currentIds, setCurrentItems, setLoading, retries = 1) => {
-    // при findItems(), currentIds не пустой и не срабатывает
     if (currentIds?.length > 0) {
         try {
             const res = await API.get_items(currentIds)
@@ -27,21 +26,25 @@ export const fetchItems = async (currentIds, setCurrentItems, setLoading, retrie
                 console.error('Error fetching items: ', er)
                 await fetchItems(currentIds, setCurrentItems, retries - 1)
             }
+        } finally {
+            if (setLoading) setLoading(false)
         }
     }
-    if (setLoading) setLoading(false)
 }
 
-export const fetchFields = async (setLoading, retries = 1) => {
+export const fetchFields = async (offset, limit, setCurrentIds, setLoading, retries = 1) => {
     if (setLoading) setLoading(true)
     try {
-        const res = await API.get_fields(1, 50)
+        const res = await API.get_fields('price', offset, limit)
         // setCurrentIds(res.filter(onlyUnique))
+        console.log(res.length)
     } catch (er) {
         if (retries > 0) {
-            console.error('Finding items error: ', er)
-            await findItems(field, value, setCurrentIds, setLoading, retries - 1)
+            console.error('Finding fields error: ', er)
+            await fetchFields(offset, limit, setCurrentIds, setLoading, retries - 1)
         }
+    } finally {
+        if (setLoading) setLoading(false)
     }
 }
 

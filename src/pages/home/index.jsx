@@ -2,15 +2,17 @@ import { useEffect, useState } from "react"
 import Home from '@/features/home'
 import MainAppLayout from "@/widgets/layouts/mainLayout"
 import { fetchIds, fetchItems } from "@/shared/api/requests"
+import initChoices from "@/shared/scripts/choicesInit"
 
 const HomePage = () => {
     const [currentIds, setCurrentIds] = useState([])
     const [currentItems, setCurrentItems] = useState([])
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentOffset, setCurrentOffset] = useState(0)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetchIds(setCurrentIds, currentPage, setLoading)
+        fetchIds(setCurrentIds, currentOffset, setLoading)
+        initChoices("#selectField")
     }, [])
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const HomePage = () => {
     }, [currentIds])
 
     return <MainAppLayout>
-        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentPage={currentPage} setCurrentPage={setCurrentPage} loading={loading} setLoading={setLoading} />
+        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentOffset={currentOffset} setCurrentOffset={setCurrentOffset} loading={loading} setLoading={setLoading} />
     </MainAppLayout>
 }
 
