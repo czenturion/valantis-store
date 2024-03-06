@@ -97,6 +97,14 @@
     border: none;
 }
 
+.noItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+
+}
+
 @media screen and (max-width: 1140px) {
     .contentItems {
         grid-template-columns: repeat(3, 230px);

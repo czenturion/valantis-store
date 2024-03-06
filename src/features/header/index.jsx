@@ -6,33 +6,40 @@ import RightArrow from "@/../public/icons/rightArrow.svg"
 import Find from "@/../public/icons/find.svg"
 import clsx from "clsx"
 import { fetchIds, findItems } from "@/shared/api/requests"
+import { OFFSET } from "@/shared/consts/consts"
 
-const Header = ({ loading, setLoading, currentOffset, setCurrentOffset, setCurrentIds }) => {
-
+const Header = ({ loading, setLoading, totalIds, setTotalIds, currentOffset, setCurrentOffset, setCurrentIds }) => {
     const [searchValue, setSearchValue] = useState('')
 
-    const nextPage = () => {
-        setCurrentOffset(currentOffset + 50)
-        fetchIds(setCurrentIds, currentOffset + 50, setLoading)
+    const prevPage = () => {
+        setCurrentOffset(currentOffset - OFFSET)
+        fetchIds(setCurrentIds, currentOffset - OFFSET, setLoading)
     }
 
-    const prevPage = () => {
-        setCurrentOffset(currentOffset - 50)
-        fetchIds(setCurrentIds, currentOffset - 50, setLoading)
+    const nextPage = () => {
+        if (totalIds.length > 0) {
+            setCurrentOffset(currentOffset + OFFSET)
+            setTotalIds(totalIds.slice(OFFSET))
+        } else {
+            setCurrentOffset(currentOffset + OFFSET)
+            fetchIds(setCurrentIds, currentOffset + OFFSET, setLoading)
+        }
     }
 
     const toFindItems = () => {
         if (searchValue.length > 0) {
-            findItems(document.getElementById("selectField").value, searchValue, setCurrentIds, setLoading)
+            findItems(document.getElementById("selectField").value, searchValue, setCurrentIds, setLoading, setTotalIds)
         } else {
             setCurrentOffset(0)
+            setTotalIds([])
             fetchIds(setCurrentIds, 0, setLoading)
         }
     }
 
     const cn = {
         buttons: clsx(loading && s.disabled, s.buttons),
-        leftArrowBtn: clsx(currentOffset === 0 && s.disabled, s.button)
+        leftArrowBtn: clsx(currentOffset === 0 && s.disabled, s.button),
+        rightArrowBtn: clsx(searchValue.length !== 0 && totalIds.length <= OFFSET && s.disabled, s.button),
     }
 
     return <div className={cn.buttons}>
@@ -40,7 +47,7 @@ const Header = ({ loading, setLoading, currentOffset, setCurrentOffset, setCurre
             <button disabled={loading} className={cn.leftArrowBtn} onClick={prevPage}>
                 <Image src={LeftArrow} width={30} height={30} alt="leftArrow"/>
             </button>
-            <button disabled={loading} className={s.button} onClick={nextPage}>
+            <button disabled={loading} className={cn.rightArrowBtn} onClick={nextPage}>
                 <Image src={RightArrow} width={30} height={30} alt="rightArrow"/>
             </button>
         </div>
@@ -48,7 +55,7 @@ const Header = ({ loading, setLoading, currentOffset, setCurrentOffset, setCurre
             <div className={s.find}>
                 <div className={s.select}>
                     {/* inline styles for soft render, should to find out about it */}
-                    <select name="field" id="selectField" style={{height: 40, width: 160, border: "none", paddingLeft: 40}}>
+                    <select name="field" id="selectField" style={{height: 40, width: 160, border: "none", paddingLeft: 40, borderRadius: 6}}>
                         <option value="product">Название</option>
                         <option value="price">Цена</option>
                         <option value="brand">Брэнд</option>

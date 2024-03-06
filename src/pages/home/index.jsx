@@ -5,6 +5,7 @@ import { fetchIds, fetchItems } from "@/shared/api/requests"
 import initChoices from "@/shared/scripts/choicesInit"
 
 const HomePage = () => {
+    const [totalIds, setTotalIds] = useState([])
     const [currentIds, setCurrentIds] = useState([])
     const [currentItems, setCurrentItems] = useState([])
     const [currentOffset, setCurrentOffset] = useState(0)
@@ -17,10 +18,15 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchItems(currentIds, setCurrentItems, setLoading)
+        console.log(totalIds.length, totalIds)
     }, [currentIds])
 
+    useEffect(() => {
+        setCurrentIds(totalIds.slice(0, 50))
+    }, [totalIds]);
+
     return <MainAppLayout>
-        <Home currentItems={currentItems} setCurrentIds={setCurrentIds} currentOffset={currentOffset} setCurrentOffset={setCurrentOffset} loading={loading} setLoading={setLoading} />
+        <Home currentItems={currentItems} totalIds={totalIds} setTotalIds={setTotalIds} setCurrentIds={setCurrentIds} currentOffset={currentOffset} setCurrentOffset={setCurrentOffset} loading={loading} setLoading={setLoading} />
     </MainAppLayout>
 }
 
