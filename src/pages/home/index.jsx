@@ -5,28 +5,29 @@ import { fetchIds, fetchItems } from "@/shared/api/requests"
 import initChoices from "@/shared/scripts/choicesInit"
 
 const HomePage = () => {
-    const [totalIds, setTotalIds] = useState([])
     const [currentIds, setCurrentIds] = useState([])
     const [currentItems, setCurrentItems] = useState([])
-    const [currentOffset, setCurrentOffset] = useState(0)
+    const [currentOffset, setCurrentOffset] = useState(50)
+    const [foundIds, setFoundIds] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetchIds(setCurrentIds, currentOffset, setLoading)
+        fetchIds(setCurrentIds, 0, setLoading)
         initChoices("#selectField")
     }, [])
 
     useEffect(() => {
         fetchItems(currentIds, setCurrentItems, setLoading)
-        console.log(totalIds.length, totalIds)
     }, [currentIds])
 
     useEffect(() => {
-        setCurrentIds(totalIds.slice(0, 50))
-    }, [totalIds]);
+        if (foundIds !== undefined) {
+            setCurrentIds(foundIds.slice(0, 50))
+        }
+    }, [foundIds])
 
     return <MainAppLayout>
-        <Home currentItems={currentItems} totalIds={totalIds} setTotalIds={setTotalIds} setCurrentIds={setCurrentIds} currentOffset={currentOffset} setCurrentOffset={setCurrentOffset} loading={loading} setLoading={setLoading} />
+        <Home currentItems={currentItems} foundIds={foundIds} setFoundIds={setFoundIds} setCurrentIds={setCurrentIds} currentOffset={currentOffset} setCurrentOffset={setCurrentOffset} loading={loading} setLoading={setLoading} />
     </MainAppLayout>
 }
 

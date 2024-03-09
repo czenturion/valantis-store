@@ -56,7 +56,7 @@
 .pages {
     display: flex;
     justify-content: center;
-    width: 160px;
+    width: 140px;
     gap: 20px;
 }
 
@@ -80,8 +80,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     min-width: 100px;
-    max-width: 250px;
-    width: 40vw;
+    max-width: 400px;
+    width: 35vw;
     height: 40px;
     border: none;
     border-radius: 6px;
