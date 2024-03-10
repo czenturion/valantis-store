@@ -10,7 +10,7 @@ export const fetchIds = async (setCurrentIds, offset, setLoading, retries = RETR
     } catch (er) {
         if (retries > 0) {
             console.error('Error fetching ids: ', er)
-            await fetchIds(setCurrentIds, offset, retries - 1)
+            await fetchIds(setCurrentIds, offset, setLoading, retries - 1)
         }
     }
 }
@@ -24,7 +24,7 @@ export const fetchItems = async (currentIds, setCurrentItems, setLoading, retrie
         } catch (er) {
             if (retries > 0) {
                 console.error('Error fetching items: ', er)
-                await fetchItems(currentIds, setCurrentItems, retries - 1)
+                await fetchItems(currentIds, setCurrentItems, setLoading, retries - 1)
             }
         }
     } else {
@@ -57,7 +57,7 @@ export const findItems = async (field, value, setCurrentIds, setLoading, setTota
     } catch (er) {
         if (retries > 0) {
             console.error('Finding items error: ', er)
-            await findItems(field, value, setCurrentIds, setLoading, retries - 1)
+            await findItems(field, value, setCurrentIds, setLoading, setTotalIds, retries - 1)
         }
     }
 }

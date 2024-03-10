@@ -42,6 +42,13 @@ const Header = ({ loading, setLoading, foundIds, setFoundIds, currentOffset, set
         }
     }
 
+    const enterKeyListener = (event) => {
+        if (event.key === "Enter" || event.key === "13") {
+            event.preventDefault()
+            toFindItems()
+        }
+    }
+
     const cn = {
         buttons: clsx(loading && s.disabled, s.buttons),
         leftArrowBtn: clsx(
@@ -49,8 +56,8 @@ const Header = ({ loading, setLoading, foundIds, setFoundIds, currentOffset, set
             mode === MODE.search && currentOffset === OFFSET && s.disabled,
             s.button),
         rightArrowBtn: clsx(
-            foundIds?.length < OFFSET && s.disabled && mode === MODE.search,
-            foundIds?.length < currentOffset && s.disabled && mode === MODE.search,
+            foundIds?.length < OFFSET && mode === MODE.search && s.disabled ,
+            foundIds?.length < currentOffset && mode === MODE.search && s.disabled ,
             currentOffset >= foundIds?.length && mode === MODE.search && s.disabled, s.button),
     }
 
@@ -68,7 +75,7 @@ const Header = ({ loading, setLoading, foundIds, setFoundIds, currentOffset, set
                 </div>
                 <input className={s.findInput} id="#findInput" onChange={e => {
                     setSearchValue(e.currentTarget.value)
-                }} type="text" placeholder="Поиск..."/>
+                }} type="text" placeholder="Пустой поиск вернет на главную..." onKeyPress={enterKeyListener}/>
                 <button className={s.button} onClick={toFindItems} type="button">
                     <Image src={Find} className={s.findIcon} width={25} height={25} alt="find"/>
                 </button>

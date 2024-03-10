@@ -27,7 +27,7 @@
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
 }
 
 .disabled {
@@ -55,9 +55,8 @@
 
 .pages {
     display: flex;
-    justify-content: center;
-    width: 140px;
-    gap: 20px;
+    justify-content: space-between;
+    width: 100px;
 }
 
 .find {

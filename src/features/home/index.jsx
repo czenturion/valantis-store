@@ -15,8 +15,11 @@ const Home = ({ loading, currentItems, ...rest }) => {
         <Header loading={loading} {...rest} />
         <div className={cn.contentItems}>
             {
-                !loading ? result?.length > 0 ? result.map((item, i) => <Item key={i} item={item}/>) : <div className={s.noItem}><strong>Ничего не найдено.</strong></div> :
-                    <Loader width={100} height={100}/>
+                !loading
+                    ? result?.length > 0
+                        ? result.map((item, i) => <Item key={i} item={item}/>)
+                        : <div className={s.noItem}><strong>Ничего не найдено</strong></div>
+                    : <Loader/>
             }
         </div>
     </div>
