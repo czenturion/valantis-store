@@ -1,15 +1,12 @@
-/* HTML: <div class="loader"></div> */
 .loader {
-    position: absolute;
-    top: 70px;
-    width: 400px;
+    max-width: 400px;
+    width: 40vw;
     height: 20px;
     border-radius: 6px;
     background:
             linear-gradient(#8c8c8c 0 0) 0/0 no-repeat
             #ddd;
     animation: l1 2s infinite linear;
-    margin-top: 1em;
 }
 @keyframes l1 {
     100% {background-size:100%}

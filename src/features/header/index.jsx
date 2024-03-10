@@ -66,8 +66,7 @@ const Header = ({ loading, setLoading, foundIds, setFoundIds, currentOffset, set
             <div className={s.find}>
                 <div className={s.select}>
                     {/* inline styles for soft render, should to find out about it */}
-                    <select name="field" id="selectField"
-                            style={{height: 40, width: 160, border: "none", paddingLeft: 40, borderRadius: 6}}>
+                    <select name="field" id="selectField" style={{display: "none"}}>
                         <option value="product">Название</option>
                         <option value="price">Цена</option>
                         <option value="brand">Брэнд</option>
