@@ -5,11 +5,14 @@
     justify-content: center;
     padding-top: 16px;
     width: 100%;
+    gap: 16px;
 }
 
 .contentItems {
+    background-color: #d2d2d2;
+    border-radius: 6px;
+    padding: 16px;
     display: grid;
-    padding: 30px;
     grid-template-columns: repeat(4, 230px);
     gap: 10px;
 }
@@ -22,8 +25,11 @@
 }
 
 .buttons {
+    background-color: #d2d2d2;
+    border-radius: 6px;
+    padding: 16px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
     text-align: center;

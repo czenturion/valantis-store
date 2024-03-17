@@ -14,7 +14,7 @@ html {
 body {
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: #ffffff;
+    background-color: #f1f1f1;
 }
 
 textarea:focus, input:focus{
